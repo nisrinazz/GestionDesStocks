@@ -1,0 +1,65 @@
+{% extends "base.html.twig" %}
+{% block title %} Liste des employes  {% endblock %}
+{% block body %}
+<section>
+    <div class="mt-5">
+        <div class="container">
+            <div class="col">
+                {% if users %}
+                <h4 style="color:rgb(56, 52, 52);">Liste des employés</h4>
+                <hr class="line">
+            </div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Prenom</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Supprimer</th>
+
+
+                </tr>
+                </thead>
+                <tbody>
+               {%for user in users%}
+                <tr>
+                    <td>{{ user.prenom }}</td>
+                    <td>{{ user.nom }}</td>
+                    <td id="email">{{ user.email }}</td>
+                    <td>{{ user.username }}</td>
+                    {% if  user.granted("ROLE_ADMIN") %}
+                        <td style="color:#84be84 ;">Admin</td>
+                    {% elseif  user.granted("ROLE_EMPLOYEE") %}
+                        <td>Employé</td>
+                        <td><a href="{{path('delete_emp', {'id': user.id }) }}" style="color:darkred;margin-left: 40px;" onclick="return confirm('Vous êtes sûr ?')"><i class="fa-solid fa-user-minus"></i></a></td>
+                    {% endif %}
+                </tr>
+                {%  endfor %}
+
+
+
+                </tbody>
+            </table>
+            {% else %}
+            <h4>Aucun employé trouvé</h4>
+            {% endif %}
+        </div>
+        <form action="{{ path("add_emp") }}" method="get">
+            <button class="button-list">Ajouter</button>
+        </form>
+    </div>
+    </div>
+    </div>
+</section>
+    <pre>
+
+
+
+
+
+
+
+</pre>
+{% endblock %}

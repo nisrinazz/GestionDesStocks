@@ -1,0 +1,86 @@
+{% extends "base.html.twig" %}
+{% block title %}Liste des ventes{% endblock %}
+
+{% block body %}
+    <section>
+        <div class="mt-5">
+            <div class="container">
+                <div class="col">
+                    {% if ventes %}
+                    <h4 style="color:rgb(56, 52, 52);">Liste des Ventes</h4>
+                    <hr class="line">
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Id de vente</th>
+                        <th>Date</th>
+                        <th>Quantité vendu</th>
+                        <th>Libellé d'article</th>
+                        <th>Mode de paiement</th>
+                        <th>Total</th>
+                        <th>Imprimer</th>
+                        <th>Modifier</th>
+                        <th>Supprimer</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for vente in ventes %}
+
+                           <tr  style="position: relative;top:0px;overflow: hidden; {{ vente.avoir == true  ? 'background-color: #efe96f ;':''}}" >
+                               <td style="position: sticky;overflow: hidden">
+                                   {% if vente.avoir == true %}
+                                       <span style="background-color:#f1a110;font-size:12px;color: white;padding-left:20px;padding-right:20px;font-weight: bold;position:absolute; top:-3px;left:-25px;margin-top:15px;margin-right:20px;margin-left:5px;transform: rotate(5.5rad);opacity:0.6;">rendue</span>
+                                   {% endif %}
+                                   <span >{{vente.id}}</span>
+                               </td>
+                               <td>{{vente.date | date('d-m-Y')}}</td>
+                               <td>{{vente.qteC}}</td>
+                               <td>{{vente.article}}</td>
+                               <td>{{vente.modePaiement}}</td>
+                               <td>{{vente.Total}}DH</td>
+                            <td style="padding-left: 50px;"><a target="_self" href="{{ path('imprimer',{'id':vente.id}) }}"><i class="fa fa-print" aria-hidden="true"></i></a></td>
+                            <td><a href="{{ path('modifier_vente',{'id':vente.id}) }}" style="font-size:15px;margin-left:30px;color:#595252;"><i class="fa fa-pencil"></i></a></td>
+                            <td><a href="{{ path('delete_vente',{'id': vente.id}) }}" style="color:darkred;font-size:15px;margin-left:30px;" onclick="return confirm('Vous êtes sûr ?')"><i class="fa fa-trash"></i></a></td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+                {% else %}
+                    <h4>Aucun vente trouvée</h4>
+                    <pre>
+
+
+
+
+
+
+
+
+                </pre>
+                {% endif %}
+            </div>
+            <form action="{{ path("add_sale") }}" method="get">
+                <button class="button-list">Ajouter</button>
+            </form>
+
+        </div>
+        </div>
+        </div>
+    </section>
+    <pre>
+
+
+
+
+
+</pre>
+<script>
+</script>
+
+{% endblock %}
+
+
+

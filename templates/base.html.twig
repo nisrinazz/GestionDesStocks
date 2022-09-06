@@ -6,14 +6,145 @@
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+            <title>list page</title>
+            <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
+            <link rel="stylesheet"
+                  href="https://unpkg.com/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.css">
+            <link rel="stylesheet" href="{{asset('assets/css/styles.css') }}">
+            <link rel="stylesheet" href="{{asset('assets/css/footer-green.css') }}">
+            <script src="https://kit.fontawesome.com/202b4d2155.js" crossorigin="anonymous"></script>
             {{ encore_entry_link_tags('app') }}
+            {{ encore_entry_script_tags('app') }}
+            <style>
+                .dropdown {
+                    position: relative;
+                    display: inline-block;
+                }
+
+                .dropdown-content {
+                    display: none;
+                    position: absolute;
+                    background-color: #f1f1f1;
+                    min-width: 160px;
+                    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                    z-index: 1;
+                }
+
+                .dropdown-content a {
+                    color: black;
+                    padding: 12px 16px;
+                    text-decoration: none;
+                    display: block;
+                }
+
+                .dropdown-content a:hover {background-color: #ddd;}
+
+                .dropdown:hover .dropdown-content {display: block;}
+
+                .dropdown:hover .dropbtn {background-color: #3e8e41;}
+            </style>
         {% endblock %}
 
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
+            <script src="/assets/js/jquery.min.js"></script>
+            <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+            <script src="https://unpkg.com/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.js"></script>
+        {% endblock %}
+        {% block custom %}
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+
+
+            <nav class="navbar navbar-light navbar-expand-md sticky-top bg-white better-bootstrap-nav-left">
+                <div class="container">
+                    <div class="collapse navbar-collapse" id="navcol-2">
+
+
+
+                        <ul class="nav navbar-nav mx-auto">
+                            <li class="nav-item"><a href="{{path('home_page')}}" style="color:rgb(79, 132, 124);font-size:12px;"><i class="fa fa-home" aria-hidden="true"></i> Accueil</a></li>
+
+                            <li class="nav-item dropdown">
+                                <a href="#" style="color:rgb(79, 132, 124);font-size:12px;"><i class="fa-solid fa-circle-down"></i> Entrée de stock</a>
+                                <div class="dropdown-content">
+                                    <a href="{{ path('add_entree') }}" style="color:rgb(79, 132, 124);font-size:10px;"><i class="fa-solid fa-boxes-stacked"></i> Alimenter le stock </a>
+                                    <a href="{{path('lister_entree')}}" style="color:rgb(79, 132, 124);font-size:10px;"><i class="fa fa-list"></i> Lister les entrées de stock </a>
+                                </div>
+                            </li>
+
+
+                            <li class="nav-item dropdown">
+                                <a href="#" style="color:rgb(79, 132, 124);font-size:12px;"><i class="fa fa-reply"></i> Avoir</a>
+                                <div class="dropdown-content">
+                                    <a href="{{ path('add_avoir') }}" style="color:rgb(79, 132, 124);font-size:10px;"><i class="fa fa-plus-square"></i> Ajouter un Avoir </a>
+                                    <a href="{{path('avoir_list')}}" style="color:rgb(79, 132, 124);font-size:10px;"><i class="fa fa-list"></i> Lister les avoirs </a>
+                                </div>
+                            </li>
+
+
+                            <li class="nav-item dropdown">
+                                <a href="#" style="color:rgb(79, 132, 124);font-size:12px;"><i class="fa fa-line-chart"></i> Ventes</a>
+                                <div class="dropdown-content">
+                                    <a href="{{ path('add_sale') }}" style="color:rgb(79, 132, 124);font-size:10px;"><i class="fa fa-cart-plus"></i> Ajouter une vente </a>
+                                    <a href="{{ path('vente_list') }}" style="color:rgb(79, 132, 124);font-size:10px;"><i class="fa fa-list"></i> Lister les ventes </a>
+                                    <a href="{{ path('list_vente_rendu') }}" style="color:rgb(79, 132, 124);font-size:10px;"><i class="fa fa-repeat"></i> Lister des ventes rendues </a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" style="color:rgb(79, 132, 124);font-size:12px;"><i class="fa fa-bookmark"></i> Articles</a>
+                                <div class="dropdown-content">
+                                    <a href="{{ path('add_art') }}" style="color:rgb(79, 132, 124);font-size:10px;"><i class="fa fa-plus-square"></i> Ajouter un article </a>
+                                    <a href="{{ path('art_list') }}" style="color:rgb(79, 132, 124);font-size:10px;"><i class="fa fa-list"></i> Lister les articles</a>
+                                    <a href="{{ path('rupture_stock') }}" style="color:rgb(79, 132, 124);font-size:10px;"><i class="fa fa-times"></i> Articles en rupture de stock</a>
+                                </div>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a href="#" style="color:rgb(79, 132, 124);font-size:12px;"><i class="fa-solid fa-user-group"></i> Employés</a>
+                                <div class="dropdown-content">
+                                    <a href="{{ path('add_emp') }}" style="color:rgb(79, 132, 124);font-size:10px;"><i class="fa-solid fa-user-plus"></i> Ajouter un employé </a>
+                                    <a href="{{ path('employees_list') }}" style="color:rgb(79, 132, 124);font-size:10px;"><i class="fa-solid fa-users"></i> Lister les employés</a>
+                                </div>
+                            </li>
+
+
+                            <li class="nav-item dropdown"><a class="dropdown-toggle nav-link text-center" data-toggle="dropdown"
+                                                             aria-expanded="false" href="#" style="color:rgb(79, 132, 124);font-size: 12px;margin-top:-11px;margin-left:-5px;"><i
+                                            class="fa-solid fa-user-gear"></i> Paramètres</a>
+                                <div class="dropdown-menu"><a class="dropdown-item" href="#"><strong>{{ app.user.nom }}
+                                            <a class="dropdown-item" href="#">{{ app.user.prenom }}</a>
+                                            <a class="dropdown-item" href="#">{{ app.user.username }}</a>
+                                        </strong></a><a class="dropdown-item" href="#"
+                                                        style="font-size: 12px;">{{ app.user.email }}</a>
+                                    <div class="dropdown-divider"></div><a class="dropdown-item" href="{{ path('edit_profile') }}">Modifier le
+                                        profil</a><a class="dropdown-item text-danger" href="{{path('app_logout')}}">se déconnecter  <i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </nav>
+
+            {% block body %}
+
+            {% endblock %}
+
+
+            <div class="footer-green mt-5">
+                <footer>
+                    <div class="container">
+
+                    </div>
+                </footer>
+
+            </div>
+
+
     </body>
 </html>

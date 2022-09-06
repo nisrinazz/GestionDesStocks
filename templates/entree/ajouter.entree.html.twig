@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+{% block title %} Alimenter le stock  {% endblock %}
+{% block body %}
+    <h4>Alimenter le stock</h4>
+    <hr class="line">
+    {% if response %}
+        <div class="alert alert-success" role="alert">
+            {{ response }}
+        </div>
+    {% endif %}
+    {{ form_start(form) }}
+
+    <div class="form-group">
+        <div class="row">
+            <div class="left">
+            {{ form_row(form.date, {'attr':{'placeholder':'Date','class':'form-control'},'label':false,'errors':false}) }}</div>
+            {{ form_row(form.article,{'attr':{'placeholder':'Libellé d\'article','class':'form-control'},'label':false}) }}
+        </div>
+        <div class="row">
+            <div class="left">{{ form_row(form.qte_a, {'attr':{'placeholder':'Quantité ','class':'form-control reg'},'label':false}) }}</div>
+            {{ form_row(form.prix_achat, {'attr':{'placeholder':'Prix d\'achat','class':'form-control'},'label':false,'errors':false}) }}
+        </div>
+        <div class="row">
+            <div class="left">{{ form_row(form.prix_vente,{'attr':{'placeholder':'Prix de vente','class':'form-control'},'label':false,'errors':false}) }}</div>
+            {{ form_row(form.nom_fournisseur,{'attr':{'placeholder':'Nom de fournisseur','class':'form-control'},'label':false,'errors':false}) }}
+        </div>
+    </div>
+    {% if form_errors(form.qte_a) or form_errors(form.prix_achat) or form_errors(form.prix_vente) %}
+        <div class="alert alert-danger" role="alert">
+            {{ form_errors(form.prix_achat,{'attr':{'class':'errors'}}) }}
+            {{ form_errors(form.prix_vente,{'attr':{'class':'errors'}})}}
+            {{ form_errors(form.qte_a,{'attr':{'class':'errors'}})}}
+        </div>
+    {% endif %}
+
+    <button type="submit" class="bouton-register" >Ajouter    <i class="fa-solid fa-plus"></i></button>
+
+    {{ form_end(form) }}
+{% endblock %}

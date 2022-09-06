@@ -1,0 +1,91 @@
+.button-list {
+  background-color: rgb(102, 193, 181);
+  border-radius:40px;
+  color: white;
+  border: none;
+  width: 200px;
+  height: 40px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  margin-left:1000px;
+}
+
+.button-list:hover {
+  background-color: rgb(79, 157, 147);
+;
+}
+.bouton-register{background-color: rgb(102, 193, 181);
+  color: white;
+  border: none;
+  width: 200px;
+  height: 40px;
+  font-weight: bold;
+  font-size: 15px;
+  margin-left:1050px;
+  cursor: pointer}
+
+.bouton-register:hover {
+  background-color: rgb(79, 157, 147);
+;
+
+}
+.form-control{
+  width:500px;
+  margin-bottom:50px;
+  margin-left:10px;
+  border-color: rgb(45, 73, 67);
+  border-width:2px;
+  border-radius:20px;
+
+}
+.line{
+  width:200px;
+  background: rgb(79, 132, 124);
+  height: 2px;
+  margin-left:0px;
+}
+.left{
+  margin-left:100px;
+}
+
+.alert{
+  margin-left:800px;
+  margin-right:200px;
+  border-radius:10px;
+  margin-top:5px;
+
+}
+
+.delete{
+  color:darkred;
+  border:none;
+  background:transparent;
+}
+
+.button-update{
+  background-color:rgb(79, 132, 124) ;
+  border:none ;
+  color:white;
+  padding-top:15px;
+  padding-bottom:15px;
+  padding-left:25px;
+  padding-right:25px;
+  font-family:"Corbel";
+  text-transform: uppercase;
+  font-weight: 500;
+
+
+
+}
+.button-update:hover{
+  background-color: rgb(56, 93, 85);
+  outline: none;
+}
+.response{
+  color:green;
+  margin-left:900px;
+
+}
+
+

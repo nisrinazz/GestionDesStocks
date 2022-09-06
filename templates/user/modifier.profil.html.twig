@@ -1,0 +1,66 @@
+{% extends "base.html.twig" %}
+{% block title %} Modifier le profil  {% endblock %}
+{% block body %}
+<div class="container mt-5 mb-5">
+    <div class="row">
+
+        <div class="col">
+            <div class="card shadow">
+
+                <div class="card-body">
+                    <div class="border rounded d-flex justify-content-center align-items-center mb-4" style="height: 50px;">
+                        <h4>Modifier votre profil  <i class="fa-solid fa-pen-to-square"></i></h4>
+                    </div>
+                {{ form_start(form) }}
+
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                {{ form_row(form.nom, {'attr':{'placeholder':'Nom','class':'form-control'},'label':false}) }}
+                            </div>
+                            <div class="col">
+                                {{ form_row(form.prenom,{'attr':{'placeholder':'Prenom','class':'form-control'},'label':false}) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">{{ form_row(form.username, {'attr':{'placeholder':'Username ','class':'form-control reg'},'label':false}) }}</div>
+                            <div class="col"> {{ form_row(form.email, {'attr':{'placeholder':'Email','class':'form-control'},'label':false,'errors':false}) }} </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+
+                        {% if response %}
+                            <div class="response" style="margin-bottom: 10px">
+                                <b>{{ response }}</b>   <i class="fa-solid fa-circle-check"></i>
+                            </div>
+                        {% endif %}
+                        {% if form_errors(form.email) %}
+                            <div style="color:red;margin-left:700px;">
+                           {{ form_errors(form.email,{'attr':{'class':'errors'}}) }}
+                            </div>
+                        {% endif %}
+
+
+                        <a href="{{path('change_password')}}" style="margin-left:40px;color:cadetblue;">Changer votre mot de passe</a>
+
+                        <div class="col d-flex d-xl-flex justify-content-end align-items-end" >
+
+                            <button class="button-update" type="submit">Enregistrer</button>
+
+                        </div>
+
+                    </div>
+                {{ form_end(form) }}
+
+
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

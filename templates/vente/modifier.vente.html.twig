@@ -1,0 +1,47 @@
+{% extends "base.html.twig" %}
+{% block title %}Modifier une vente{% endblock %}
+{% block body %}
+    <h4 >Modifier une Vente</h4>
+    <hr class="line">
+    {% if success %}
+        <div class="alert alert-success" role="alert">
+            {{ success }}
+        </div>
+    {% endif %}
+
+    {{ form_start(form) }}
+
+    <div class="form-group">
+        <div class="row">
+            <div class="left">{{ form_row(form.date,{'attr':{'placeholder':'Libellé','class':'form-control'},'label':false,'errors':false}) }}</div>
+            {{ form_row(form.article, {'attr':{'placeholder':'Libellé','class':'form-control'},'label':false,'errors':false,'errors':false}) }}
+
+        </div>
+        <div class="row">
+            <div class="left">{{ form_row(form.mode_paiement, {'attr':{'placeholder':'mode de paiement','class':'form-control reg'},'label':false,'errors':false}) }}</div>
+            {{ form_row(form.qte_c, {'attr':{'placeholder':'Quantité','class':'form-control'},'label':false,'errors':false,'errors':false}) }}
+        </div>
+    </div>
+    {% if form_errors(form.article) or form_errors(form.date) or form_errors(form.mode_paiement)  or form_errors(form.qte_c) or response %}
+        <div class="alert alert-danger" role="alert">
+            {{ form_errors(form.article,{'attr':{'class':'errors'}}) }}
+            {{ form_errors(form.date,{'attr':{'class':'errors'}})}}
+            {{ form_errors(form.mode_paiement,{'attr':{'class':'errors'}})}}
+            {{ form_errors(form.qte_c,{'attr':{'class':'errors'}})}}
+            <div class="errors"> {{ response }}</div>
+
+        </div>
+    {% endif %}
+    <div class="col d-flex d-xl-flex justify-content-center align-items-end" >
+        <button type="submit" class="button-update" style="margin-right:120px;" >Enregister</button>
+    </div>
+
+    {{ form_end(form) }}
+    <pre>
+
+
+
+
+
+</pre>
+{% endblock %}

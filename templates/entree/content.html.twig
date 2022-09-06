@@ -1,0 +1,45 @@
+{% if entrees %}
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Nom de fournisseur</th>
+            <th>Libellé d'article</th>
+            <th>Quantité ajoutée</th>
+            <th>Prix d'achat</th>
+            <th>Prix de vente</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for entree in entrees %}
+            <tr>
+                <td>{{entree.date | date('d-m-Y')}}</td>
+                <td>{{entree.nomFournisseur}}</td>
+                <td>{{entree.article}}</td>
+                <td>{{entree.qteA}}</td>
+                <td>{{entree.prixAchat}}</td>
+                <td>{{entree.prixVente}}</td>
+                <td><a href="{{ path('modifier_entree',{'id':entree.id}) }}" style="font-size:15px;margin-left:30px;color:#595252;"><i class="fa fa-pencil"></i></a></td>
+                <td><a href="{{ path('delete_entree',{'id': entree.id}) }}" style="color:darkred;font-size:15px;margin-left:30px;" onclick="return confirm('Vous êtes sûr ?')"><i class="fa fa-trash"></i></a></td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+{% else %}
+    <h4>Aucune entrée trouvée</h4>
+    <pre>
+
+
+
+
+
+
+
+
+                </pre>
+{% endif %}

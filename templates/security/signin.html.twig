@@ -1,0 +1,55 @@
+<?php
+
+?>
+<!doctype html>
+<html>
+
+<head>
+    <title>Connexion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/202b4d2155.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="{{ asset('style/signin.css') }}">
+</head>
+
+<body>
+
+<div class="container" id="container">
+    <div class="row">
+
+        <div class="form-container sign-in-container">
+            <form method="POST">
+
+                <h1 style="color:rgb(102, 193, 181);font-size:26px;"><i class="fa-solid fa-lock-open"></i> Connexion
+                </h1>
+                <hr>
+                <input name="email" type="email" id="email" value="{{ last_username }}"  required placeholder="Email" />
+                <input name="password" type="password" id="password" required  placeholder="Mot de passe" />
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <a href="#" style="color:gray">Mot de passe oublié?</a>
+                <button class="sign">Connexion</button>
+
+                 {% if error %}
+                <div  style="color:red; margin-top:10px; font-size:12px;" >
+                    <i class="fa-solid fa-circle-exclamation"></i>  {{ error.messageKey|trans(error.messageData,'security') }}
+                </div>
+                {% endif %}
+            </form>
+
+
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-right">
+                    <i class="fa-solid fa-people-roof" style="font-size:100px"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+
+</html>

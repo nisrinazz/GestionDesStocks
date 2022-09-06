@@ -1,0 +1,93 @@
+{% extends "base.html.twig" %}
+{% block title %} Liste des entrees de stock  {% endblock %}
+{% block body %}
+
+    <section>
+        <div class="mt-5">
+            <div class="container">
+                <div class="col">
+
+                    <h4 style="color:rgb(56, 52, 52);">Liste des Entrées</h4>
+                    <hr class="line">
+                </div>
+
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-filter" aria-hidden="true"></i> filtrer par fournisseur
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                         style="padding-right:70px;">
+                        <form id="filters">
+                            <div>
+                                {% for four in fournisseurs %}
+                                    <div class="form-check dropdown-item" >
+
+                                        <input class="form-check-input" name="four[]" type="checkbox" value="{{ four }}"  id="{{ four }}">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            {{ four }}
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+                <div id="content">
+                    {% include 'entree/content.html.twig' %}
+                </div>
+
+            </div>
+            <form action="{{ path("add_entree") }}" method="get">
+                <button class="button-list">Ajouter</button>
+            </form>
+
+        </div>
+        </div>
+        </div>
+    </section>
+    <pre>
+
+
+
+
+
+</pre>
+<script>
+    window.onload = () => {
+        const FiltersForm = document.querySelector('#filters');
+
+        document.querySelectorAll('#filters input').forEach(input =>
+        { input.addEventListener("change", () =>{
+            const Form = new FormData(FiltersForm);
+            const Params = new URLSearchParams();
+            Form.forEach(( value,key )=>{
+                Params.append(key , value);
+                // console.log('key : ',key ,'value :',value);
+            })
+            const Url = new URL(window.location.href);
+
+            fetch(Url.pathname + "?" +  Params.toString() + "&ajax=1" , {
+                headers : {
+                    "X-Requested-With" : "XMLHttpRequest"
+                }
+            }).then( response => response.json()
+            ).then(
+                data => {
+                    const content = document.querySelector('#content');
+                    content.innerHTML = data.content;
+                }
+            )
+                .catch( e => alert(e));
+        })
+
+        });
+    }
+
+</script>
+
+{% endblock %}
+
+
+

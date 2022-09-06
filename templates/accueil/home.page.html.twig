@@ -1,0 +1,236 @@
+{% extends 'base.html.twig' %}
+{% block title %} Accueil  {% endblock %}
+{% block custom %}
+<style>
+   .card-acc{
+       max-width: 22rem;
+       margin-left:10px;
+       border-radius:4px;
+       border:none;
+       box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+   }
+   .card-body-acc{
+       padding-bottom: 60px;
+   }
+   .card-footer-acc{
+      padding-bottom: 6px;
+       padding-top:6px;
+       border:none;
+       border-radius:4px;
+       cursor:pointer;
+   }
+   .footer-content{
+       font-size:12px;
+       font-weight: bold;
+       margin-left:80px;
+       color:white;
+       text-transform: uppercase;
+       letter-spacing: 3px;
+
+   }
+   .number{
+      color:white;
+       font-size:30px;
+       font-weight:bold;
+       text-transform: uppercase;
+       letter-spacing: 3px;
+       padding-top: 5px;
+       padding-left:5px;
+   }
+   .main{
+       position:absolute;
+       padding-top:5px;
+       color:white;
+       text-transform: uppercase;
+       letter-spacing: 3px;
+       padding-left:5px;
+   }
+   .icon{
+       position:absolute;
+       margin-left:50px;
+       margin-top:0px;
+       font-size:70px;
+
+   }
+
+
+</style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js" integrity="sha512-G8JE1Xbr0egZE5gNGyUm1fF764iHVfRXshIoUWCTPAbKkkItp/6qal5YAHXrxEu4HNfPTQs6HOu3D5vCGS1j3w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock %}
+{% block body %}
+         <div class="row">
+             <div class="column" style="width:44%;margin-left: 15px;">
+                 <div class="card shadow" style="padding: 20px 20px 20px 20px;margin-left:10px;">
+                     <h4 style="color:#656060;"><i class="fa fa-bar-chart"></i> Statistiques du jour </h4>
+                     <div style="height:400px; width:500px;margin-top:10px;"><canvas height="400" width="400" id="chart"></canvas></div>
+                 </div>
+             </div>
+
+             <div class="column"  style="width:26%;margin-left: 30px;">
+                 <div class="card mb-3 card-acc" style=" background-color: #da743e;">
+                     <div class="card-body card-body-acc">
+                         <div class="row">
+                             <div class="column col-7">
+                                 <span class="number">{{caisse}}DH</span>
+                                 <br />
+                                 <span class="main">Caisse</span>
+                             </div>
+                             <div class="column">
+                                 <span class="icon" style="color: #c05c2c;"><i class="fa-solid fa-sack-dollar"></i></span>
+                             </div>
+
+                         </div>
+                     </div>
+                 </div>
+
+
+                 <div class="card mb-3 card-acc" style=" background-color: #3fa983;">
+                     <div class="card-body card-body-acc">
+                         <div class="row">
+                             <div class="column col-7">
+                                 <span class="number">{{ ventees }}</span>
+                                 <br />
+                                 <span class="main">Ventes</span>
+                             </div>
+                             <div class="column">
+                        <span class="icon"><i class="fa fa-cart-plus" aria-hidden="true"
+                                              style="color: #368f72; "></i></span>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="card-footer card-footer-acc" style="background-color: #368f72;"><span
+                                 class="footer-content">Plus de détail <i class="fa fa-arrow-circle-right"
+                                                                          aria-hidden="true"></i></span></div>
+                 </div>
+
+
+                 <div class="card mb-3 card-acc" style=" background-color: #4185b4;">
+                     <div class="card-body card-body-acc">
+                         <div class="row">
+                             <div class="column col-7">
+                                 <span class="number">{{ articles }}</span>
+                                 <br />
+                                 <span class="main">Articles</span>
+                             </div>
+                             <div class="column">
+                        <span class="icon" style="color:#356b8d;"><i class="fa fa-barcode"></i></span>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="card-footer card-footer-acc" style="background-color: #356b8d;"><span
+                                 class="footer-content">Plus de détail <i class="fa fa-arrow-circle-right"
+                                                                          aria-hidden="true"></i></span></div>
+                 </div>
+
+
+
+             </div>
+
+             <div class="column" style="width:26%;">
+                 <div class="card mb-3 card-acc" style="background-color: #d5d551;">
+                     <div class="card-body card-body-acc">
+                         <div class="row">
+                             <div class="column col-7">
+                                 <span class="number">{{ employes }}</span>
+                                 <br />
+                                 <span class="main">Employés</span>
+                             </div>
+                             <div class="column">
+                        <span class="icon" style="color:#c9bc43;"><i class="fa fa-user-plus"></i></span>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+
+                 <div class="card mb-3 card-acc" style=" background-color: #d03f3f;">
+                     <div class="card-body card-body-acc">
+                         <div class="row">
+                             <div class="column col-7">
+                                 <span class="number">{{ articles_en_rupture }}</span>
+                                 <br />
+                                 <span class="main">Articles indisponibles</span>
+                             </div>
+                             <div class="column">
+                                 <span class="icon"><i class="fa-solid fa-clipboard-list" style="color: #a23131; "></i></span>
+                             </div>
+                         </div>
+
+
+
+                     </div>
+                     <div class="card-footer card-footer-acc" style="background-color: #a23131;"><span
+                                 class="footer-content">Plus de détail <i class="fa fa-arrow-circle-right"
+                                                                          aria-hidden="true"></i></span></div>
+
+                 </div>
+
+                 <div class="card mb-3 card-acc" style=" background-color: #8a3cb6;">
+                     <div class="card-body card-body-acc">
+                         <div class="row">
+                             <div class="column col-7">
+                                 <span class="number">{{ventes_rendu}}</span>
+                                 <br />
+                                 <span class="main">Ventes rendues</span>
+                             </div>
+                             <div class="column">
+                                 <span class="icon"><i class="fa-solid fa-box-open" style="color: #713291; "></i></span>
+                             </div>
+                         </div>
+
+
+
+                     </div>
+                     <div class="card-footer card-footer-acc" style="background-color: #713291;"><span
+                                 class="footer-content">Plus de détail <i class="fa fa-arrow-circle-right"
+                                                                          aria-hidden="true"></i></span></div>
+
+                 </div>
+             </div>
+
+
+
+         </div>
+
+    <script>
+        var ctx = document.getElementById("chart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Ventes", "Avoirs", "Entrées"],
+                datasets: [{
+                    data: [{{ ventes }},{{ avoirs }},{{ entrees }}],
+                    backgroundColor: [
+                        'rgba(181,120,250,0.2)',
+                        'rgba(41,130,232,0.2)',
+                        'rgba(88,253,36,0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(181,120,250,1)',
+                        'rgba(41,130,232, 1)',
+                        'rgba(88,253,36, 1)'
+
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                legend: {
+                    display: false,
+                },
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    yAxes: [{
+                        grace : '5%' ,
+                        ticks: {
+                            beginAtZero:true,
+                            stepSize : 2 ,
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+{% endblock %}

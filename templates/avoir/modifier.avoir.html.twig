@@ -1,0 +1,43 @@
+{% extends "base.html.twig" %}
+{% block title %} Modifier un avoir  {% endblock %}
+{% block body %}
+    <h4 >Modifier un Avoir</h4>
+    <hr class="line">
+    {% if success %}
+        <div class="alert alert-success" role="alert">
+            {{ success }}
+        </div>
+    {% endif %}
+
+    {{ form_start(form) }}
+
+    <div class="form-group">
+        <div class="row">
+            <div class="left">{{ form_row(form.vente, {'attr':{'placeholder':'Libellé','class':'form-control'},'label':false,'errors':false,'errors':false}) }}</div>
+            {{ form_row(form.date,{'attr':{'placeholder':'Libellé','class':'form-control'},'label':false,'errors':false}) }}
+
+
+        </div>
+        <div class="row">
+            <div class="left">{{ form_row(form.methode_remboursement, {'attr':{'placeholder':'mode de paiement','class':'form-control reg'},'label':false,'errors':false}) }}</div>
+        </div>
+    </div>
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            <div class="errors"> {{ error }}</div>
+        </div>
+
+    {% endif %}
+    <div class="col d-flex d-xl-flex justify-content-center align-items-end" >
+        <button type="submit" class="button-update" style="margin-right:120px;" >Enregister</button>
+    </div>
+
+    {{ form_end(form) }}
+    <pre>
+
+
+
+
+
+</pre>
+{% endblock %}

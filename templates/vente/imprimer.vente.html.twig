@@ -1,0 +1,71 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="{{ app.request.schemeAndHttpHost ~ asset('assets/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet"
+          href="{{ app.request.schemeAndHttpHost ~ 'https://unpkg.com/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.css' }}">
+    <style>
+
+        td {
+            padding-right:20px;
+        }
+
+
+        body {
+            font-family:Franklin Gothic Medium;
+        }
+        .txt1{
+            text-align: left;text-transform: uppercase;color:#2d2d5e;
+            font-size:20px;
+        }
+    </style>
+
+</head>
+<body>
+<h1 class="txt1" style="text-align: center;font-size: 50px;margin-bottom: 40px;"><i class="fa-solid fa-file-invoice"></i>Facture</h1>
+<div style="margin-left:600px;">
+    <b><h7 class="txt1" style="margin-right: 70px;">Id de vente</h7></b>
+    <span style="margin-right: 15px;font-size:20px;">{{ vente.id }}</span>
+    <br/>
+    <b><h7 class="txt1" style="margin-right: 70px;">Date </h7></b>
+    <span style="margin-right: 15px;font-size:20px;">{{ vente.date | date('d - m - Y') }}</span>
+    <br/>
+</div>
+
+<table class="table table-borderless" style="margin-top:150px;">
+
+    <thead class="table-dark">
+
+    <th>Qté</th>
+    <th>Désignation</th>
+    <th>Description</th>
+    <th>Prix de vente</th>
+
+    </thead>
+
+    <tbody>
+    <td>{{ vente.qteC }}</td>
+    <td>{{ vente.article }}</td>
+    <td>{{ vente.article.description }}</td>
+    <td>{{ vente.prixVente }}</td>
+    </tbody>
+    <tbody>
+    <td></td>
+    <td></td>
+    <b><td>Mode de paiement</td></b>
+    <b><td>{{ vente.modePaiement }}</td></b>
+    </tbody>
+    <tfoot class="table-active">
+    <td></td>
+    <td></td>
+    <b><td >Total</td></b>
+    <b><td>{{ vente.total }} DH</td></b>
+    </tfoot>
+</table>
+
+
+
+</body>
+
+</html>
