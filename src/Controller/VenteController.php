@@ -125,8 +125,4 @@ public function imprimer(Vente $vente , Pdf $pdf ) : Response {
         return new PdfResponse($pdf->getOutputFromHtml($html),$filename);
     }
 
-    #[Route('employe/test/{id}' , name : 'test')]
-public function test(Vente $vente) : Response {
-        return $this->render('vente/imprimer.vente.html.twig',['vente'=>$vente]);
-    }
 }
